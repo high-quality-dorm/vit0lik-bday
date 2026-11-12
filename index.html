@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Витолик+ · С днём рождения</title>
+  <meta name="description" content="Персональная подписка на дружбу. Один год, шесть сюрпризов и безлимитная поддержка. Активируй код и заходи внутрь.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0e1813">
+  <meta property="og:title" content="Витолик+ · С днём рождения">
+  <meta property="og:description" content="Тебе оформлена подписка на год дружбы. Код — на открытке.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Prata&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Витолик плюс — наверх">
+      <span class="brand-mark" aria-hidden="true">В<span>+</span></span>
+      <span class="brand-text">
+        <span>Friendship Club</span>
+        <span>Est. 2026</span>
+      </span>
+    </a>
+    <p class="header-meta">
+      <span>Birthday edition</span>
+      <span class="header-dot" aria-hidden="true"></span>
+      <span>№ 001</span>
+    </p>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-orbit" aria-hidden="true">
+        <span class="orbit-dot"></span>
+      </div>
+
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>Подарочная подписка · 2026</p>
+          <h1>С днём<br>рождения,<br><span class="hero-name">Витолик<span class="hero-period">.</span></span></h1>
+          <p class="hero-lead">Мы не смогли выбрать один подарок. Поэтому оформили тебе <strong>год дружбы</strong> — с доставками радости, поддержкой 24/7 и правом звонить в любое время.</p>
+          <div class="hero-facts" aria-label="Условия подписки">
+            <div class="fact"><span class="fact-value">365</span><span class="fact-label">дней</span></div>
+            <div class="fact"><span class="fact-value">6</span><span class="fact-label">доставок</span></div>
+            <div class="fact"><span class="fact-value">∞</span><span class="fact-label">заботы</span></div>
+          </div>
+        </div>
+
+        <div class="pass-wrap">
+          <div class="pass-float">
+            <article class="pass" id="pass" aria-label="Членский билет клуба Витолик плюс">
+              <div class="pass-main">
+                <div class="pass-top">
+                  <span class="pass-monogram" aria-hidden="true">В<span>+</span></span>
+                  <span class="pass-club">Friendship Club<br><span>Birthday edition</span></span>
+                  <span class="pass-number">№ 001</span>
+                </div>
+                <p class="pass-name">Витолик<span>+</span></p>
+                <p class="pass-plan">Тариф · Безлимитная дружба</p>
+                <div class="pass-data">
+                  <div><span>Member since</span><strong id="pass-since">—</strong></div>
+                  <div><span>Valid</span><strong>365 days</strong></div>
+                  <div><span>Status</span><strong id="pass-status">Ожидает</strong></div>
+                </div>
+              </div>
+              <div class="pass-stub" aria-hidden="true">
+                <span class="stub-text">Admit one · good year</span>
+                <span class="stub-medallion"><strong>365</strong><small>дней</small></span>
+              </div>
+              <div class="pass-stamp" id="pass-stamp" aria-hidden="true">
+                <span>Active</span>
+                <small id="stamp-date">—</small>
+              </div>
+            </article>
+          </div>
+          <p class="pass-caption">Персональный пропуск · действителен на один хороший год</p>
+        </div>
+
+        <div class="hero-action">
+          <form class="activate" id="activate-form" novalidate>
+            <label for="promo">Код активации</label>
+            <div class="activate-row">
+              <input id="promo" name="promo" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Код с открытки" aria-describedby="promo-help promo-status">
+              <button type="submit">
+                <span>Активировать</span>
+                <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5"/></svg>
+              </button>
+            </div>
+            <p class="form-help" id="promo-help">Он на открытке. Или спроси у любого из нас.</p>
+            <p class="form-status" id="promo-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="activated" id="activated" hidden>
+            <div class="activated-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            </div>
+            <div>
+              <p class="activated-title" id="activated-title" tabindex="-1">Подписка активирована</p>
+              <p class="activated-date" id="activated-date">Теперь всё официально.</p>
+            </div>
+            <a class="club-link" href="#club">Открыть клуб <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <noscript><p class="form-help">Для активации нужен JavaScript. Включи его и обнови страницу.</p></noscript>
+          <p class="fineprint">* Подписка не подлежит отмене. Дружба не является товаром. Но это уже детали.</p>
+        </div>
+      </div>
+
+      <a class="scroll-cue" id="scroll-cue" href="#club" hidden>
+        <span>Вниз, в клуб</span>
+        <span class="scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <section class="club" id="club" hidden>
+      <div class="paper">
+        <header class="club-header reveal">
+          <div>
+            <p class="eyebrow dark"><span class="eyebrow-line" aria-hidden="true"></span>Клуб открыт</p>
+            <h2>Добро пожаловать,<br><span class="club-name">Витолик.</span></h2>
+          </div>
+          <p class="club-intro">Твой год начался. Ниже — расписание сюрпризов, мелкий шрифт и одно большое письмо.</p>
+        </header>
+
+        <section class="statement reveal" aria-label="Статус подписки">
+          <div class="statement-top">
+            <p class="status"><span class="status-dot" aria-hidden="true"></span><span id="club-status">Активна</span></p>
+            <p class="statement-id">Участник № 001 · с <span id="club-start">—</span></p>
+          </div>
+          <div class="statement-grid">
+            <div><span>Тариф</span><strong>Безлимитная дружба</strong></div>
+            <div><span>Действует до</span><strong id="club-end">—</strong></div>
+            <div><span>Доставок</span><strong>6</strong></div>
+            <div class="next"><span>Ближайшая</span><strong id="next-label">—</strong><small id="next-date">—</small></div>
+          </div>
+          <div class="year-progress">
+            <div class="progress-labels"><span id="progress-day">День 1 из 365</span><span id="progress-percent">0%</span></div>
+            <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+            <p class="progress-note" id="progress-note">Год только начинается.</p>
+          </div>
+        </section>
+
+        <section class="deliveries reveal" aria-labelledby="deliveries-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow dark"><span class="eyebrow-line" aria-hidden="true"></span>Маршрут на год</p>
+              <h2 id="deliveries-title">Шесть поводов<br>не остаться одному</h2>
+            </div>
+            <p>Точные подарки не афишируем — пусть будет сюрприз. Но даты уже стоят в календаре.</p>
+          </div>
+          <ol class="timeline" id="timeline"></ol>
+        </section>
+
+        <section class="benefits reveal" aria-labelledby="benefits-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow dark"><span class="eyebrow-line" aria-hidden="true"></span>Что входит</p>
+              <h2 id="benefits-title">Больше, чем<br>подписка</h2>
+            </div>
+            <p>Мы посмотрели на тарифы и решили: жадничать не будем.</p>
+          </div>
+          <dl class="benefit-grid">
+            <div class="benefit">
+              <span class="benefit-mark" aria-hidden="true">+</span>
+              <dt>6 доставок радости</dt>
+              <dd>Раз в пару месяцев. Без предупреждения и без повода.</dd>
+            </div>
+            <div class="benefit">
+              <span class="benefit-mark" aria-hidden="true">+</span>
+              <dt>Поддержка 24/7</dt>
+              <dd>Позвонить, написать, приехать. Без записи и очереди.</dd>
+            </div>
+            <div class="benefit">
+              <span class="benefit-mark" aria-hidden="true">+</span>
+              <dt>Приоритет в плохие дни</dt>
+              <dd>Ты всегда первый в списке на обнимашки.</dd>
+            </div>
+            <div class="benefit">
+              <span class="benefit-mark" aria-hidden="true">+</span>
+              <dt>Безлимит на «просто поболтать»</dt>
+              <dd>Даже если тема — вообще ничего.</dd>
+            </div>
+            <div class="benefit">
+              <span class="benefit-mark" aria-hidden="true">+</span>
+              <dt>Персональный менеджер</dt>
+              <dd>Все мы. По очереди. Иногда одновременно.</dd>
+            </div>
+            <div class="benefit">
+              <span class="benefit-mark" aria-hidden="true">+</span>
+              <dt>Пожизненная гарантия</dt>
+              <dd>Дружба не входит в список услуг, которые заканчиваются.</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="letter reveal" aria-labelledby="letter-title">
+          <div class="letter-paper">
+            <p class="letter-meta">Письмо · без мелкого шрифта</p>
+            <h2 id="letter-title">Витолик,</h2>
+            <p>мы долго думали, что подарить тебе в этот день. Один подарок казался слишком маленьким, а что-то большое — слишком очевидным. Поэтому вот тебе целый год.</p>
+            <p>Не абстрактный. Наш общий: со встречами, глупыми сообщениями, звонками без повода и шестью маленькими сюрпризами. А если станет трудно — просто набери. Подписка работает без выходных.</p>
+            <p class="letter-final">С днём рождения. Спасибо, что ты есть.</p>
+            <p class="letter-sign">Твои люди</p>
+            <p class="letter-terms">* Продлевается автоматически. Отмена невозможна. Дружба не является финансовой услугой.</p>
+            <svg class="wax-seal" viewBox="0 0 140 140" aria-hidden="true">
+              <defs>
+                <filter id="wax-rough">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="4"/>
+                </filter>
+                <radialGradient id="wax-fill" cx="35%" cy="30%" r="75%">
+                  <stop offset="0%" stop-color="#d15a43"/>
+                  <stop offset="70%" stop-color="#b9412f"/>
+                  <stop offset="100%" stop-color="#923021"/>
+                </radialGradient>
+                <path id="seal-ring" d="M70,70 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/>
+              </defs>
+              <g filter="url(#wax-rough)">
+                <circle cx="70" cy="70" r="66" fill="url(#wax-fill)"/>
+              </g>
+              <circle cx="70" cy="70" r="57" fill="none" stroke="#f2eadb" stroke-opacity=".55" stroke-width="1"/>
+              <text class="seal-ring-text" fill="#f2eadb">
+                <textPath href="#seal-ring" startOffset="1%">FRIENDSHIP CLUB · BIRTHDAY EDITION · </textPath>
+              </text>
+              <text x="70" y="80" text-anchor="middle" fill="#f2eadb" class="seal-monogram">В+</text>
+            </svg>
+          </div>
+        </section>
+
+        <footer class="club-footer">
+          <span class="footer-brand">В<span>+</span></span>
+          <p>Friendship Club · Est. 2026</p>
+          <p>Сделано с любовью. Продление — автоматическое.</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="app.js"></script>
+</body>
+</html>
