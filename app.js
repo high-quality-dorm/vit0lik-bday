@@ -1,51 +1,14 @@
-// Всё, что можно менять без вёрстки: имя, код, срок и сюрпризы.
+// Всё, что можно менять без вёрстки: имя, код и срок.
 const CONFIG = {
   durationDays: 30,
   acceptedCodes: ["VITOLIK", "VITOLIK+", "ВИТОЛИК", "ВИТОЛИК+"],
-  storageKey: "vitolik-club-start",
-  deliveries: [
-    {
-      day: 5,
-      title: "Что-то тёплое",
-      text: "Небольшой жест, который приятно получить без повода."
-    },
-    {
-      day: 10,
-      title: "Что-то вкусное",
-      text: "Повод увидеться, даже если его нет. И, возможно, что-то к чаю."
-    },
-    {
-      day: 15,
-      title: "Что-то важное",
-      text: "Письмо, которое лучше прочитать не в спешке."
-    },
-    {
-      day: 20,
-      title: "Что-то безумное",
-      text: "Один день, сценарий которого мы пока не расскажем."
-    },
-    {
-      day: 25,
-      title: "Что-то твоё",
-      text: "Подарок, который сможет придумать только тот, кто тебя знает."
-    },
-    {
-      day: 30,
-      title: "Что-то, что останется",
-      text: "Не вещь. Хотя, может, и вещь. Главное — надолго."
-    }
-  ]
+  storageKey: "vitolik-club-start"
 };
 
 const MONTHS_LONG = [
   "января", "февраля", "марта", "апреля", "мая", "июня",
   "июля", "августа", "сентября", "октября", "ноября", "декабря"
 ];
-const MONTHS_SHORT = [
-  "янв", "фев", "мар", "апр", "май", "июн",
-  "июл", "авг", "сен", "окт", "ноя", "дек"
-];
-
 const els = {
   body: document.body,
   form: document.querySelector("#activate-form"),
@@ -56,15 +19,12 @@ const els = {
   activatedDate: document.querySelector("#activated-date"),
   club: document.querySelector("#club"),
   scrollCue: document.querySelector("#scroll-cue"),
-  timeline: document.querySelector("#timeline"),
   passSince: document.querySelector("#pass-since"),
   passStatus: document.querySelector("#pass-status"),
   stampDate: document.querySelector("#stamp-date"),
   clubStatus: document.querySelector("#club-status"),
   clubStart: document.querySelector("#club-start"),
   clubEnd: document.querySelector("#club-end"),
-  nextLabel: document.querySelector("#next-label"),
-  nextDate: document.querySelector("#next-date"),
   progressDay: document.querySelector("#progress-day"),
   progressPercent: document.querySelector("#progress-percent"),
   progressFill: document.querySelector("#progress-fill"),
@@ -97,10 +57,6 @@ function pad(value) {
 
 function formatLong(date) {
   return `${date.getDate()} ${MONTHS_LONG[date.getMonth()]} ${date.getFullYear()}`;
-}
-
-function formatShort(date) {
-  return `${pad(date.getDate())} ${MONTHS_SHORT[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 function formatCompact(date) {
@@ -173,64 +129,6 @@ function setStatus(message, isError = false) {
   els.status.style.color = isError ? "var(--seal)" : "";
 }
 
-function getDeliveryState(start) {
-  const today = startOfDay(new Date());
-  const deliveries = [...CONFIG.deliveries]
-    .sort((a, b) => a.day - b.day)
-    .map((delivery, index) => {
-      const date = addDays(start, delivery.day);
-      return {
-        ...delivery,
-        index,
-        date,
-        daysAway: daysBetween(date, today)
-      };
-    });
-
-  const nextIndex = deliveries.findIndex((delivery) => delivery.daysAway >= 0);
-
-  deliveries.forEach((delivery, index) => {
-    if (delivery.daysAway < 0) delivery.status = "past";
-    else if (delivery.daysAway === 0) delivery.status = "today";
-    else if (index === nextIndex) delivery.status = "next";
-    else delivery.status = "future";
-  });
-
-  return { deliveries, next: nextIndex >= 0 ? deliveries[nextIndex] : null };
-}
-
-function renderTimeline(deliveries) {
-  els.timeline.innerHTML = deliveries.map((delivery) => {
-    const isPast = delivery.status === "past";
-    const countdown = isPast
-      ? "позади"
-      : delivery.daysAway === 0
-        ? "сегодня"
-        : `через ${delivery.daysAway} ${pluralDays(delivery.daysAway)}`;
-    const statusLabel = {
-      past: "позади",
-      today: "сегодня",
-      next: "следующая",
-      future: "впереди"
-    }[delivery.status];
-
-    return `
-      <li class="delivery" data-status="${delivery.status}">
-        <span class="delivery-index">${pad(delivery.index + 1)}</span>
-        <div class="delivery-date">
-          <time datetime="${delivery.date.getFullYear()}-${pad(delivery.date.getMonth() + 1)}-${pad(delivery.date.getDate())}">${formatShort(delivery.date)}</time>
-          <span class="delivery-status">${statusLabel}</span>
-        </div>
-        <div class="delivery-body">
-          <h3>${delivery.title}</h3>
-          <p>${delivery.text}</p>
-        </div>
-        <span class="delivery-tag">${countdown}</span>
-      </li>
-    `;
-  }).join("");
-}
-
 function renderProgress(start) {
   const today = startOfDay(new Date());
   const elapsed = Math.max(0, daysBetween(today, start));
@@ -266,7 +164,6 @@ function renderProgress(start) {
 function renderActive(start, options = {}) {
   const { animate = false } = options;
   const end = addDays(start, CONFIG.durationDays);
-  const { deliveries, next } = getDeliveryState(start);
   const expired = renderProgress(start);
 
   els.club.hidden = false;
@@ -284,21 +181,6 @@ function renderActive(start, options = {}) {
   els.clubStart.textContent = formatLong(start);
   els.clubEnd.textContent = expired ? "Бессрочно" : formatLong(end);
   els.clubStatus.textContent = expired ? "Продлена" : "Активна";
-
-  if (next) {
-    els.nextLabel.textContent = next.daysAway === 0
-      ? "Сегодня"
-      : `Через ${next.daysAway} ${pluralDays(next.daysAway)}`;
-    els.nextDate.textContent = formatLong(next.date);
-  } else if (expired) {
-    els.nextLabel.textContent = "Следующий месяц";
-    els.nextDate.textContent = "Уже включён в подписку";
-  } else {
-    els.nextLabel.textContent = "Все доставки";
-    els.nextDate.textContent = "Дальше — только забота";
-  }
-
-  renderTimeline(deliveries);
 
   if (animate) {
     window.requestAnimationFrame(() => {

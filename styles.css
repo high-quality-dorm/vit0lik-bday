@@ -1013,7 +1013,7 @@ body.is-active .pass-stamp {
 
 .statement-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr .55fr 1.1fr;
+  grid-template-columns: 1.1fr 1fr 1.1fr;
   gap: 20px;
   padding: 19px 0 21px;
 }
@@ -1038,23 +1038,6 @@ body.is-active .pass-stamp {
   font-size: 14px;
   line-height: 1.4;
   font-weight: 500;
-}
-
-.statement-grid .next {
-  padding-left: 16px;
-  border-left: 1px solid var(--line-paper);
-}
-
-.statement-grid .next strong {
-  color: var(--seal);
-}
-
-.statement-grid .next small {
-  display: block;
-  margin-top: 2px;
-  font-family: var(--font-mono);
-  font-size: 8px;
-  color: var(--muted-dark);
 }
 
 .year-progress {
@@ -1099,7 +1082,6 @@ body.is-active .pass-stamp {
 
 /* Sections */
 
-.deliveries,
 .benefits {
   padding-top: clamp(58px, 8vw, 108px);
 }
@@ -1119,171 +1101,6 @@ body.is-active .pass-stamp {
   font-size: 14px;
   line-height: 1.65;
   color: var(--muted-dark);
-}
-
-/* Timeline */
-
-.timeline {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.delivery {
-  position: relative;
-  display: grid;
-  grid-template-columns: 58px 1fr minmax(210px, 1.2fr) 100px;
-  gap: clamp(14px, 2.6vw, 34px);
-  align-items: start;
-  padding: clamp(20px, 2.8vw, 29px) 0;
-  border-bottom: 1px solid var(--line-paper);
-}
-
-.delivery::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 79px;
-  width: 1px;
-  background: var(--line-paper-soft);
-}
-
-.delivery-index {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--brass-deep);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  line-height: 1.5;
-  letter-spacing: .06em;
-}
-
-.delivery-index::after {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border: 1px solid var(--brass-deep);
-  border-radius: 50%;
-  background: var(--paper);
-}
-
-.delivery-date {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding-left: 14px;
-}
-
-.delivery-date time {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1.5;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-}
-
-.delivery-status {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  line-height: 1.4;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--muted-dark);
-}
-
-.delivery-body h3 {
-  margin: 0 0 5px;
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2.1vw, 1.8rem);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -.025em;
-}
-
-.delivery-body p {
-  max-width: 390px;
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--muted-dark);
-}
-
-.delivery-tag {
-  justify-self: end;
-  align-self: center;
-  padding: 5px 7px;
-  border: 1px solid var(--line-paper);
-  font-family: var(--font-mono);
-  font-size: 8px;
-  line-height: 1;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted-dark);
-  white-space: nowrap;
-}
-
-.delivery[data-status="next"] {
-  margin: 0 -14px;
-  padding-right: 14px;
-  padding-left: 14px;
-  border-bottom-color: transparent;
-  background: rgba(201, 166, 102, .12);
-}
-
-.delivery[data-status="next"]::before {
-  background: rgba(201, 166, 102, .48);
-}
-
-.delivery[data-status="next"] .delivery-index,
-.delivery[data-status="next"] .delivery-index::after,
-.delivery[data-status="next"] .delivery-tag {
-  color: var(--seal);
-  border-color: var(--seal);
-}
-
-.delivery[data-status="next"] .delivery-index::after {
-  background: var(--seal);
-}
-
-.delivery[data-status="next"] .delivery-tag {
-  background: var(--seal);
-  color: var(--paper);
-}
-
-.delivery[data-status="today"] {
-  margin: 0 -14px;
-  padding-right: 14px;
-  padding-left: 14px;
-  background: rgba(185, 65, 47, .09);
-}
-
-.delivery[data-status="today"] .delivery-index,
-.delivery[data-status="today"] .delivery-index::after,
-.delivery[data-status="today"] .delivery-tag {
-  color: var(--seal);
-  border-color: var(--seal);
-}
-
-.delivery[data-status="today"] .delivery-index::after {
-  background: var(--seal);
-}
-
-.delivery[data-status="today"] .delivery-tag {
-  background: var(--seal);
-  color: var(--paper);
-}
-
-.delivery[data-status="past"] {
-  opacity: .52;
-}
-
-.delivery[data-status="past"] .delivery-index::after {
-  background: var(--brass-deep);
-  border-color: var(--brass-deep);
 }
 
 /* Benefits */
@@ -1563,18 +1380,6 @@ html.js .reveal.is-visible {
     width: min(100%, 470px);
   }
 
-  .delivery {
-    grid-template-columns: 50px 1fr 1.2fr;
-  }
-
-  .delivery-tag {
-    display: none;
-  }
-
-  .delivery::before {
-    left: 68px;
-  }
-
   .benefit-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1670,63 +1475,6 @@ html.js .reveal.is-visible {
   .statement-grid {
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-  }
-
-  .statement-grid .next {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .delivery {
-    grid-template-columns: 40px 1fr;
-    gap: 10px 16px;
-    padding: 20px 0;
-  }
-
-  .delivery::before {
-    left: 52px;
-  }
-
-  .delivery-date {
-    grid-column: 2;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 9px;
-    padding-left: 0;
-    margin-top: -4px;
-  }
-
-  .delivery-body {
-    grid-column: 2;
-  }
-
-  .delivery[data-status="next"],
-  .delivery[data-status="today"] {
-    margin-right: -10px;
-    margin-left: -10px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-
-  .delivery[data-status="next"]::before,
-  .delivery[data-status="today"]::before {
-    left: 42px;
-  }
-
-  .delivery[data-status="next"] .delivery-index::before,
-  .delivery[data-status="today"] .delivery-index::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 18px;
-    width: 17px;
-    height: 1px;
-    background: currentColor;
-    opacity: .4;
-  }
-
-  .delivery-body h3 {
-    font-size: 1.45rem;
   }
 
   .wax-seal {
@@ -1921,12 +1669,6 @@ html.js .reveal.is-visible {
 
   .statement-grid span {
     font-size: 7px;
-  }
-
-  .statement-grid .next {
-    grid-column: 1 / -1;
-    padding-top: 13px;
-    border-top: 1px solid var(--line-paper-soft);
   }
 
   .progress-labels,
