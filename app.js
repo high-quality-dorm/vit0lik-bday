@@ -7,12 +7,12 @@ const CONFIG = {
     {
       day: 7,
       title: "Что-то тёплое",
-      text: "Маленький жест, который согреет быстрее любого пледа."
+      text: "Небольшой жест, который приятно получить без повода."
     },
     {
       day: 30,
       title: "Что-то вкусное",
-      text: "Повод встретиться без повода. И, возможно, что-то к чаю."
+      text: "Повод увидеться, даже если его нет. И, возможно, что-то к чаю."
     },
     {
       day: 90,
@@ -255,7 +255,7 @@ function renderProgress(start) {
   } else if (elapsed < CONFIG.durationDays * 0.25) {
     els.progressNote.textContent = `Уже ${elapsed} ${pluralDays(elapsed)} вместе. Дальше — интереснее.`;
   } else if (elapsed < CONFIG.durationDays * 0.75) {
-    els.progressNote.textContent = "Больше половины? Не важно. Главное — вместе.";
+    els.progressNote.textContent = "Половина года позади. Дальше — по плану.";
   } else {
     els.progressNote.textContent = "Год почти прожит. Продление уже включено.";
   }
