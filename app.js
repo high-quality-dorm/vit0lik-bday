@@ -1,36 +1,36 @@
 // Всё, что можно менять без вёрстки: имя, код, срок и сюрпризы.
 const CONFIG = {
-  durationDays: 365,
+  durationDays: 30,
   acceptedCodes: ["VITOLIK", "VITOLIK+", "ВИТОЛИК", "ВИТОЛИК+"],
   storageKey: "vitolik-club-start",
   deliveries: [
     {
-      day: 7,
+      day: 5,
       title: "Что-то тёплое",
       text: "Небольшой жест, который приятно получить без повода."
     },
     {
-      day: 30,
+      day: 10,
       title: "Что-то вкусное",
       text: "Повод увидеться, даже если его нет. И, возможно, что-то к чаю."
     },
     {
-      day: 90,
+      day: 15,
       title: "Что-то важное",
       text: "Письмо, которое лучше прочитать не в спешке."
     },
     {
-      day: 180,
+      day: 20,
       title: "Что-то безумное",
       text: "Один день, сценарий которого мы пока не расскажем."
     },
     {
-      day: 270,
+      day: 25,
       title: "Что-то твоё",
       text: "Подарок, который сможет придумать только тот, кто тебя знает."
     },
     {
-      day: 365,
+      day: 30,
       title: "Что-то, что останется",
       text: "Не вещь. Хотя, может, и вещь. Главное — надолго."
     }
@@ -239,7 +239,7 @@ function renderProgress(start) {
   const dayNumber = expired ? CONFIG.durationDays : elapsed + 1;
 
   els.progressDay.textContent = expired
-    ? "Год прожит"
+    ? "Месяц позади"
     : `День ${dayNumber} из ${CONFIG.durationDays}`;
   els.progressPercent.textContent = `${Math.round(percent)}%`;
 
@@ -251,13 +251,13 @@ function renderProgress(start) {
   if (expired) {
     els.progressNote.textContent = "Подписка продлена автоматически. Отмена по-прежнему невозможна.";
   } else if (elapsed === 0) {
-    els.progressNote.textContent = "Год только начинается.";
+    els.progressNote.textContent = "Всё только начинается.";
   } else if (elapsed < CONFIG.durationDays * 0.25) {
     els.progressNote.textContent = `Уже ${elapsed} ${pluralDays(elapsed)} вместе. Дальше — интереснее.`;
   } else if (elapsed < CONFIG.durationDays * 0.75) {
-    els.progressNote.textContent = "Половина года позади. Дальше — по плану.";
+    els.progressNote.textContent = "Половина срока позади. Дальше — по плану.";
   } else {
-    els.progressNote.textContent = "Год почти прожит. Продление уже включено.";
+    els.progressNote.textContent = "Месяц почти прошёл. Продление уже включено.";
   }
 
   return expired;
@@ -291,7 +291,7 @@ function renderActive(start, options = {}) {
       : `Через ${next.daysAway} ${pluralDays(next.daysAway)}`;
     els.nextDate.textContent = formatLong(next.date);
   } else if (expired) {
-    els.nextLabel.textContent = "Следующий год";
+    els.nextLabel.textContent = "Следующий месяц";
     els.nextDate.textContent = "Уже включён в подписку";
   } else {
     els.nextLabel.textContent = "Все доставки";
