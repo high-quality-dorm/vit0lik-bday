@@ -902,9 +902,9 @@ body.is-active .pass {
 .pass-arrow {
   position: absolute;
   z-index: 4;
-  left: 60%;
-  bottom: 54px;
-  width: clamp(100px, 15vw, 150px);
+  left: 58%;
+  bottom: clamp(44px, 6vw, 56px);
+  width: clamp(125px, 37.5%, 210px);
   height: auto;
   color: var(--brass-deep);
   opacity: .75;
@@ -1699,13 +1699,6 @@ html.js .reveal.is-visible {
 
   .stub-code strong {
     font-size: clamp(9px, 2.8vw, 12px);
-  }
-
-  .pass-arrow {
-    left: auto;
-    right: 10px;
-    bottom: 34px;
-    width: 64px;
   }
 
   .pass-stamp {
