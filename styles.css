@@ -309,7 +309,7 @@ h1 {
   font-family: var(--font-display);
   font-size: clamp(3.35rem, 7.15vw, 7.3rem);
   font-weight: 400;
-  line-height: .94;
+  line-height: 1.08;
   letter-spacing: -.045em;
   color: var(--paper);
 }
