@@ -902,12 +902,12 @@ body.is-active .pass {
 .pass-arrow {
   position: absolute;
   z-index: 4;
-  left: 58%;
-  bottom: clamp(48px, 6vw, 66px);
+  left: 60%;
+  bottom: 54px;
   width: clamp(100px, 15vw, 150px);
   height: auto;
   color: var(--brass-deep);
-  opacity: .7;
+  opacity: .75;
   pointer-events: none;
 }
 
