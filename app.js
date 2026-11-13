@@ -1,7 +1,7 @@
 // Всё, что можно менять без вёрстки: имя, код и срок.
 const CONFIG = {
   durationDays: 30,
-  acceptedCodes: ["VITOLIK", "VITOLIK+", "ВИТОЛИК", "ВИТОЛИК+"],
+  acceptedCodes: ["CO5429162"],
   storageKey: "vitolik-club-start"
 };
 
@@ -9,6 +9,7 @@ const MONTHS_LONG = [
   "января", "февраля", "марта", "апреля", "мая", "июня",
   "июля", "августа", "сентября", "октября", "ноября", "декабря"
 ];
+const CYRILLIC_LOOKALIKES = { "С": "C", "О": "O" };
 const els = {
   body: document.body,
   form: document.querySelector("#activate-form"),
@@ -20,7 +21,7 @@ const els = {
   club: document.querySelector("#club"),
   scrollCue: document.querySelector("#scroll-cue"),
   passSince: document.querySelector("#pass-since"),
-  passStatus: document.querySelector("#pass-status"),
+  passEnd: document.querySelector("#pass-end"),
   stampDate: document.querySelector("#stamp-date"),
   clubStatus: document.querySelector("#club-status"),
   clubStart: document.querySelector("#club-start"),
@@ -73,7 +74,11 @@ function pluralDays(number) {
 }
 
 function normalizeCode(value) {
-  return value.trim().toUpperCase().replace(/\s+/g, "");
+  return value
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g, "")
+    .replace(/[СО]/g, (letter) => CYRILLIC_LOOKALIKES[letter]);
 }
 
 function isAcceptedCode(value) {
@@ -173,7 +178,7 @@ function renderActive(start, options = {}) {
   els.body.classList.add("is-active");
 
   els.passSince.textContent = formatCompact(start);
-  els.passStatus.textContent = "Активна";
+  els.passEnd.textContent = expired ? "Бессрочно" : formatCompact(end);
   els.stampDate.textContent = formatCompact(start);
 
   els.activatedTitle.textContent = animate ? "Подписка активирована" : "Подписка активна";
@@ -210,7 +215,7 @@ els.form.addEventListener("submit", (event) => {
   const value = els.input.value;
 
   if (!value.trim()) {
-    setStatus("Сначала введи код — он на открытке.", true);
+    setStatus("Сначала введи серийный номер с купюры.", true);
     els.form.classList.add("has-error");
     els.input.setAttribute("aria-invalid", "true");
     els.input.focus();
@@ -221,7 +226,7 @@ els.form.addEventListener("submit", (event) => {
   if (!isAcceptedCode(value)) {
     failedAttempts += 1;
     const hint = failedAttempts >= 3
-      ? " Подсказка: это твоё имя. Плюс не обязателен."
+      ? " Подсказка: серийный номер напечатан на купюре справа внизу."
       : "";
     setStatus(`Не тот код. Попробуй ещё.${hint}`, true);
     els.form.classList.add("has-error");

@@ -7,6 +7,10 @@
   --brass-deep: #7d6030;
   --seal: #b9412f;
   --sage: #9daa9f;
+  --note-paper: #c9d4c6;
+  --note-ink: #173a2e;
+  --note-ink-soft: #4a6858;
+  --note-line: rgba(23, 58, 46, .32);
   --muted-dark: #5c6b5f;
   --line-dark: rgba(242, 234, 219, .16);
   --line-dark-soft: rgba(242, 234, 219, .09);
@@ -604,7 +608,7 @@ h1 {
   animation: scroll-pulse 2s ease-in-out infinite;
 }
 
-/* Membership pass */
+/* Souvenir note */
 
 .pass-wrap {
   grid-area: pass;
@@ -624,239 +628,359 @@ h1 {
 }
 
 .pass {
-  --base-rotate: -3.2deg;
+  --base-rotate: -2.4deg;
   --rx: 0deg;
   --ry: 0deg;
   position: relative;
-  width: min(100%, 535px);
-  aspect-ratio: 1.58 / 1;
+  width: min(100%, 590px);
+  aspect-ratio: 2.12 / 1;
   display: flex;
-  color: var(--ink);
+  overflow: hidden;
+  color: var(--note-ink);
   background:
-    linear-gradient(115deg, rgba(255, 255, 255, .5), transparent 32%),
-    repeating-linear-gradient(0deg, rgba(20, 37, 29, .018) 0, rgba(20, 37, 29, .018) 1px, transparent 1px, transparent 4px),
-    var(--paper);
-  border-radius: 13px;
+    radial-gradient(ellipse at 72% 38%, rgba(255, 255, 255, .38), transparent 58%),
+    radial-gradient(circle at 16% 80%, rgba(201, 166, 102, .16), transparent 35%),
+    repeating-linear-gradient(0deg, rgba(23, 58, 46, .022) 0, rgba(23, 58, 46, .022) 1px, transparent 1px, transparent 4px),
+    var(--note-paper);
+  border-radius: 9px;
   box-shadow:
     0 48px 90px -34px rgba(0, 0, 0, .85),
     0 8px 24px -12px rgba(0, 0, 0, .55),
-    inset 0 0 0 1px rgba(255, 255, 255, .38);
+    inset 0 0 0 1px rgba(255, 255, 255, .35);
   transform: rotate(var(--base-rotate)) rotateX(var(--rx)) rotateY(var(--ry));
   transform-style: preserve-3d;
   transition: transform .45s var(--ease), box-shadow .45s var(--ease);
 }
 
 body.is-active .pass {
-  --base-rotate: -1.4deg;
+  --base-rotate: -1.2deg;
   box-shadow:
     0 50px 100px -34px rgba(0, 0, 0, .9),
-    0 0 70px -18px rgba(201, 166, 102, .24),
-    inset 0 0 0 1px rgba(255, 255, 255, .38);
+    0 0 80px -18px rgba(201, 166, 102, .28),
+    inset 0 0 0 1px rgba(255, 255, 255, .35);
 }
 
 .pass::before,
 .pass::after {
   content: "";
   position: absolute;
-  z-index: 3;
-  right: calc(27% - 9px);
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--ink);
-  box-shadow: inset 0 0 0 1px rgba(242, 234, 219, .1);
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid var(--note-line);
 }
 
 .pass::before {
-  top: -9px;
+  inset: 7px;
+  border-radius: 5px;
 }
 
 .pass::after {
-  bottom: -9px;
+  inset: 11px;
+  border-color: rgba(23, 58, 46, .12);
+  border-radius: 3px;
 }
 
-.pass-main {
-  width: 73%;
+.note-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--note-ink);
+  opacity: .08;
+  pointer-events: none;
+}
+
+.note-thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 64.5%;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, rgba(201, 166, 102, .7) 0 8px, rgba(201, 166, 102, .18) 8px 15px);
+  opacity: .55;
+}
+
+.note-watermark {
+  position: absolute;
+  right: 24%;
+  bottom: 4%;
+  font-family: var(--font-display);
+  font-size: clamp(76px, 13vw, 152px);
+  line-height: .8;
+  letter-spacing: -.06em;
+  color: var(--note-ink);
+  opacity: .045;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+.note-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: clamp(17px, 2.1vw, 28px) clamp(16px, 2vw, 26px) clamp(15px, 1.8vw, 23px);
+  padding: clamp(17px, 2.1vw, 26px) clamp(18px, 2.3vw, 30px);
 }
 
-.pass-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+.note-head {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: start;
+  gap: 12px;
 }
 
-.pass-monogram {
-  width: clamp(32px, 3vw, 41px);
-  height: clamp(32px, 3vw, 41px);
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  border: 1px solid rgba(20, 37, 29, .45);
-  border-radius: 50%;
+.note-bank {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(7px, .68vw, 8.5px);
+  line-height: 1.45;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.note-bank span {
+  color: var(--note-ink-soft);
+}
+
+.note-edition {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: clamp(6.5px, .58vw, 7.5px);
+  line-height: 1.4;
+  letter-spacing: .15em;
+  text-align: right;
+  text-transform: uppercase;
+  color: var(--note-ink-soft);
+  white-space: nowrap;
+}
+
+.note-value {
+  margin: 0;
+  text-align: right;
+  line-height: .9;
+}
+
+.note-value span {
+  display: block;
   font-family: var(--font-display);
-  font-size: clamp(16px, 1.6vw, 20px);
+  font-size: clamp(1.65rem, 3.2vw, 2.65rem);
+  letter-spacing: -.035em;
+}
+
+.note-value small {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: clamp(6px, .54vw, 7px);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--note-ink-soft);
+}
+
+.note-mid {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: clamp(10px, 1.8vw, 22px);
+  padding: clamp(4px, .7vw, 8px) 0;
+}
+
+.note-medallion {
+  flex: none;
+  width: clamp(58px, 8.6vw, 92px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(23, 58, 46, .48);
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle, transparent 0 5px, rgba(23, 58, 46, .16) 5px 6px),
+    var(--note-paper);
+  box-shadow:
+    inset 0 0 0 4px var(--note-paper),
+    inset 0 0 0 5px rgba(23, 58, 46, .32),
+    inset 0 0 0 10px var(--note-paper),
+    inset 0 0 0 11px rgba(23, 58, 46, .14);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2.2vw, 25px);
   line-height: 1;
 }
 
-.pass-monogram span {
-  font-size: .72em;
+.note-medallion i {
+  font-style: normal;
+  font-size: .7em;
   color: var(--seal);
 }
 
-.pass-club {
-  margin-top: 2px;
-  font-family: var(--font-mono);
-  font-size: clamp(7px, .68vw, 9px);
-  line-height: 1.45;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.pass-club span {
-  color: var(--muted-dark);
-}
-
-.pass-number {
-  margin-left: auto;
-  padding-top: 3px;
-  font-family: var(--font-mono);
-  font-size: clamp(7px, .68vw, 9px);
-  letter-spacing: .08em;
-  color: var(--muted-dark);
-  white-space: nowrap;
-}
-
-.pass-name {
-  margin: clamp(14px, 2.3vw, 28px) 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.45rem, 4.2vw, 3.9rem);
-  line-height: .95;
-  letter-spacing: -.055em;
-  white-space: nowrap;
-}
-
-.pass-name span {
-  color: var(--brass-deep);
-}
-
-.pass-plan {
-  margin: clamp(5px, .7vw, 8px) 0 0;
-  font-family: var(--font-mono);
-  font-size: clamp(7px, .67vw, 8.5px);
-  line-height: 1.4;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  color: var(--muted-dark);
-}
-
-.pass-data {
-  display: grid;
-  grid-template-columns: 1.08fr .75fr .85fr;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: clamp(9px, 1.3vw, 15px);
-  border-top: 1px solid var(--line-paper);
-}
-
-.pass-data div {
+.note-title-wrap {
+  flex: 1;
   min-width: 0;
+  text-align: center;
 }
 
-.pass-data span {
+.note-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.1vw, 4.15rem);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: .035em;
+  text-indent: .035em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+.note-sub {
+  margin: clamp(7px, .9vw, 11px) 0 0;
+  font-family: var(--font-mono);
+  font-size: clamp(6.5px, .6vw, 8px);
+  line-height: 1.4;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--note-ink-soft);
+}
+
+
+
+
+
+
+
+.note-foot {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.note-sign {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-family: "Caveat", var(--font-display);
+  font-size: clamp(13px, 1.35vw, 17px);
+  line-height: 1;
+  color: var(--note-ink-soft);
+  transform: rotate(-2deg);
+}
+
+.note-sign svg {
+  width: clamp(44px, 4.8vw, 60px);
+  height: auto;
+  margin-bottom: 1px;
+  color: rgba(23, 58, 46, .55);
+}
+
+.note-dates {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1px 7px;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: clamp(5.5px, .5vw, 6.5px);
+  line-height: 1.45;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--note-ink-soft);
+}
+
+.note-dates strong {
+  font-weight: 500;
+  color: var(--note-ink);
+}
+
+.note-serial {
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.note-serial span {
   display: block;
   margin-bottom: 2px;
   font-family: var(--font-mono);
-  font-size: clamp(6.5px, .6vw, 8px);
-  line-height: 1.3;
-  letter-spacing: .08em;
+  font-size: clamp(5.5px, .52vw, 6.5px);
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--muted-dark);
+  color: var(--note-ink-soft);
 }
 
-.pass-data strong {
+.note-serial strong {
   display: block;
-  overflow: hidden;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(23, 58, 46, .3);
   font-family: var(--font-mono);
-  font-size: clamp(8px, .85vw, 11px);
+  font-size: clamp(12px, 1.75vw, 17px);
   font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -.02em;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.pass-stub {
-  width: 27%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: clamp(15px, 1.8vw, 23px) 8px clamp(13px, 1.5vw, 19px);
-  border-left: 1px dashed rgba(20, 37, 29, .35);
-  background: linear-gradient(90deg, rgba(20, 37, 29, .025), rgba(20, 37, 29, .075));
-  border-radius: 0 13px 13px 0;
-}
-
-.stub-text {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-family: var(--font-mono);
-  font-size: clamp(6.5px, .62vw, 8px);
-  line-height: 1;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted-dark);
-  white-space: nowrap;
-}
-
-.stub-medallion {
-  width: clamp(43px, 4.7vw, 61px);
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(20, 37, 29, .5);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 4px var(--paper), inset 0 0 0 5px rgba(20, 37, 29, .18);
-  line-height: 1;
-}
-
-.stub-medallion strong {
-  font-family: var(--font-display);
-  font-size: clamp(12px, 1.45vw, 18px);
-  font-weight: 400;
-}
-
-.stub-medallion small {
-  margin-top: 2px;
-  font-family: var(--font-mono);
-  font-size: clamp(6px, .55vw, 7px);
+  line-height: 1.2;
   letter-spacing: .1em;
+}
+
+.note-arrow {
+  position: absolute;
+  z-index: 4;
+  right: clamp(28px, 3.4vw, 42px);
+  bottom: clamp(54px, 7vw, 68px);
+  width: clamp(82px, 9.5vw, 118px);
+  height: auto;
+  color: var(--seal);
+  opacity: .86;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
+
+.note-annotation {
+  position: absolute;
+  z-index: 4;
+  right: clamp(18px, 2.4vw, 30px);
+  bottom: clamp(104px, 12.5vw, 122px);
+  font-family: "Caveat", var(--font-display);
+  font-size: clamp(15px, 1.6vw, 20px);
+  line-height: 1;
+  color: var(--seal);
+  transform: rotate(-7deg);
+  pointer-events: none;
+}
+
+.note-microtext {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  width: max-content;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: clamp(4.5px, .42vw, 5.5px);
+  letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--muted-dark);
+  color: rgba(23, 58, 46, .55);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.note-microtext-top {
+  top: 10px;
+}
+
+.note-microtext-bottom {
+  bottom: 10px;
 }
 
 .pass-stamp {
   position: absolute;
-  z-index: 4;
-  top: 63%;
-  left: 43%;
-  width: clamp(78px, 8.7vw, 112px);
+  z-index: 6;
+  top: 47%;
+  left: 26%;
+  width: clamp(80px, 9vw, 116px);
   padding: 6px 8px 7px;
   border: 2px solid var(--seal);
-  box-shadow: inset 0 0 0 2px var(--paper), inset 0 0 0 3px var(--seal);
+  box-shadow: inset 0 0 0 2px var(--note-paper), inset 0 0 0 3px var(--seal);
   color: var(--seal);
   text-align: center;
   font-family: var(--font-mono);
-  font-size: clamp(8px, .9vw, 11px);
+  font-size: clamp(7.5px, .82vw, 10px);
   line-height: 1.1;
-  letter-spacing: .16em;
+  letter-spacing: .14em;
   text-transform: uppercase;
   mix-blend-mode: multiply;
   opacity: 0;
@@ -1584,41 +1708,58 @@ html.js .reveal.is-visible {
   }
 
   .pass {
-    border-radius: 10px;
+    aspect-ratio: 1.92 / 1;
+    border-radius: 7px;
   }
 
-  .pass-main {
-    width: 72%;
+  .note-inner {
+    padding: 13px 14px;
   }
 
-  .pass-stub {
-    width: 28%;
-    border-radius: 0 10px 10px 0;
+  .note-head {
+    grid-template-columns: 1fr auto;
   }
 
-  .pass-data {
-    grid-template-columns: 1fr .75fr .8fr;
-    gap: 5px;
+  .note-edition {
+    display: none;
+  }
+
+  .note-mid {
+    gap: 0;
+  }
+
+  .note-medallion,
+  .note-sign,
+  .note-dates,
+  .note-watermark,
+  .note-microtext {
+    display: none;
+  }
+
+  .note-title {
+    font-size: clamp(2.2rem, 11.5vw, 3.1rem);
+  }
+
+  .note-sub {
+    letter-spacing: .09em;
+  }
+
+  .note-arrow {
+    right: 16px;
+    bottom: 38px;
+    width: 62px;
+  }
+
+  .note-annotation {
+    right: 14px;
+    bottom: 66px;
+    font-size: 15px;
   }
 
   .pass-stamp {
-    top: 67%;
-    left: 41%;
-  }
-
-  .pass::before,
-  .pass::after {
-    right: calc(28% - 8px);
-    width: 16px;
-    height: 16px;
-  }
-
-  .pass::before {
-    top: -8px;
-  }
-
-  .pass::after {
-    bottom: -8px;
+    top: 76%;
+    left: 24%;
+    width: 82px;
   }
 
   .pass-caption {
@@ -1742,6 +1883,18 @@ html.js .reveal.is-visible {
   .club-footer p:last-child {
     order: 2;
     flex-basis: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .note-annotation {
+    display: none;
+  }
+
+  .note-arrow {
+    right: 14px;
+    bottom: 42px;
+    width: 54px;
   }
 }
 
