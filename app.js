@@ -215,7 +215,7 @@ els.form.addEventListener("submit", (event) => {
   const value = els.input.value;
 
   if (!value.trim()) {
-    setStatus("Сначала введи серийный номер с купюры.", true);
+    setStatus("Сначала введи промокод с билета.", true);
     els.form.classList.add("has-error");
     els.input.setAttribute("aria-invalid", "true");
     els.input.focus();
@@ -226,7 +226,7 @@ els.form.addEventListener("submit", (event) => {
   if (!isAcceptedCode(value)) {
     failedAttempts += 1;
     const hint = failedAttempts >= 3
-      ? " Подсказка: серийный номер напечатан на купюре справа внизу."
+      ? " Подсказка: промокод напечатан на билете справа."
       : "";
     setStatus(`Не тот код. Попробуй ещё.${hint}`, true);
     els.form.classList.add("has-error");
@@ -248,27 +248,6 @@ els.form.addEventListener("input", () => {
   els.input.removeAttribute("aria-invalid");
   if (els.status.textContent) setStatus("");
 });
-
-function initTilt() {
-  if (reduceMotion.matches) return;
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-
-  const wrap = els.pass.parentElement;
-  if (!wrap) return;
-
-  wrap.addEventListener("pointermove", (event) => {
-    const rect = els.pass.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    els.pass.style.setProperty("--ry", `${x * 7}deg`);
-    els.pass.style.setProperty("--rx", `${y * -5}deg`);
-  });
-
-  wrap.addEventListener("pointerleave", () => {
-    els.pass.style.setProperty("--ry", "0deg");
-    els.pass.style.setProperty("--rx", "0deg");
-  });
-}
 
 function initReveals() {
   const reveals = [...document.querySelectorAll(".reveal")];
@@ -363,7 +342,6 @@ function burstConfetti(source) {
 }
 
 handleReset();
-initTilt();
 initReveals();
 
 const savedStart = readStart();

@@ -7,10 +7,6 @@
   --brass-deep: #7d6030;
   --seal: #b9412f;
   --sage: #9daa9f;
-  --note-paper: #c9d4c6;
-  --note-ink: #173a2e;
-  --note-ink-soft: #4a6858;
-  --note-line: rgba(23, 58, 46, .32);
   --muted-dark: #5c6b5f;
   --line-dark: rgba(242, 234, 219, .16);
   --line-dark-soft: rgba(242, 234, 219, .09);
@@ -608,7 +604,7 @@ h1 {
   animation: scroll-pulse 2s ease-in-out infinite;
 }
 
-/* Souvenir note */
+/* Admission ticket */
 
 .pass-wrap {
   grid-area: pass;
@@ -617,7 +613,6 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  perspective: 1400px;
 }
 
 .pass-float {
@@ -628,357 +623,307 @@ h1 {
 }
 
 .pass {
-  --base-rotate: -2.4deg;
-  --rx: 0deg;
-  --ry: 0deg;
+  --stub: 28%;
   position: relative;
-  width: min(100%, 590px);
-  aspect-ratio: 2.12 / 1;
+  width: min(100%, 560px);
+  aspect-ratio: 1.84 / 1;
   display: flex;
-  overflow: hidden;
-  color: var(--note-ink);
+  color: var(--ink);
   background:
-    radial-gradient(ellipse at 72% 38%, rgba(255, 255, 255, .38), transparent 58%),
-    radial-gradient(circle at 16% 80%, rgba(201, 166, 102, .16), transparent 35%),
-    repeating-linear-gradient(0deg, rgba(23, 58, 46, .022) 0, rgba(23, 58, 46, .022) 1px, transparent 1px, transparent 4px),
-    var(--note-paper);
-  border-radius: 9px;
+    radial-gradient(circle at 20% 12%, rgba(255, 255, 255, .42), transparent 48%),
+    repeating-linear-gradient(0deg, rgba(20, 37, 29, .018) 0, rgba(20, 37, 29, .018) 1px, transparent 1px, transparent 4px),
+    var(--paper);
+  border-radius: 11px;
   box-shadow:
-    0 48px 90px -34px rgba(0, 0, 0, .85),
-    0 8px 24px -12px rgba(0, 0, 0, .55),
-    inset 0 0 0 1px rgba(255, 255, 255, .35);
-  transform: rotate(var(--base-rotate)) rotateX(var(--rx)) rotateY(var(--ry));
-  transform-style: preserve-3d;
-  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+    0 46px 86px -36px rgba(0, 0, 0, .85),
+    0 10px 28px -14px rgba(0, 0, 0, .5),
+    inset 0 0 0 1px rgba(255, 255, 255, .4);
+  transition: box-shadow .45s var(--ease);
 }
 
 body.is-active .pass {
-  --base-rotate: -1.2deg;
   box-shadow:
-    0 50px 100px -34px rgba(0, 0, 0, .9),
+    0 48px 96px -36px rgba(0, 0, 0, .9),
     0 0 80px -18px rgba(201, 166, 102, .28),
-    inset 0 0 0 1px rgba(255, 255, 255, .35);
+    inset 0 0 0 1px rgba(255, 255, 255, .4);
 }
 
 .pass::before,
 .pass::after {
   content: "";
   position: absolute;
-  z-index: 2;
-  pointer-events: none;
-  border: 1px solid var(--note-line);
+  z-index: 5;
+  right: calc(var(--stub) - 9px);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1px rgba(242, 234, 219, .1);
 }
 
 .pass::before {
-  inset: 7px;
-  border-radius: 5px;
+  top: -9px;
 }
 
 .pass::after {
-  inset: 11px;
-  border-color: rgba(23, 58, 46, .12);
-  border-radius: 3px;
+  bottom: -9px;
 }
 
-.note-pattern {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--note-ink);
-  opacity: .08;
-  pointer-events: none;
-}
-
-.note-thread {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 64.5%;
-  width: 2px;
-  background: repeating-linear-gradient(180deg, rgba(201, 166, 102, .7) 0 8px, rgba(201, 166, 102, .18) 8px 15px);
-  opacity: .55;
-}
-
-.note-watermark {
-  position: absolute;
-  right: 24%;
-  bottom: 4%;
-  font-family: var(--font-display);
-  font-size: clamp(76px, 13vw, 152px);
-  line-height: .8;
-  letter-spacing: -.06em;
-  color: var(--note-ink);
-  opacity: .045;
-  transform: rotate(-8deg);
-  pointer-events: none;
-  user-select: none;
-}
-
-.note-inner {
+.pass-main {
   position: relative;
-  z-index: 3;
-  width: 100%;
+  width: calc(100% - var(--stub));
   display: flex;
   flex-direction: column;
-  padding: clamp(17px, 2.1vw, 26px) clamp(18px, 2.3vw, 30px);
+  overflow: hidden;
+  padding: clamp(18px, 2vw, 26px) clamp(18px, 2.2vw, 26px) clamp(15px, 1.7vw, 21px);
+  border-radius: 11px 0 0 11px;
 }
 
-.note-head {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: start;
-  gap: 12px;
-}
-
-.note-bank {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: clamp(7px, .68vw, 8.5px);
-  line-height: 1.45;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.note-bank span {
-  color: var(--note-ink-soft);
-}
-
-.note-edition {
-  margin: 2px 0 0;
-  font-family: var(--font-mono);
-  font-size: clamp(6.5px, .58vw, 7.5px);
-  line-height: 1.4;
-  letter-spacing: .15em;
-  text-align: right;
-  text-transform: uppercase;
-  color: var(--note-ink-soft);
-  white-space: nowrap;
-}
-
-.note-value {
-  margin: 0;
-  text-align: right;
-  line-height: .9;
-}
-
-.note-value span {
-  display: block;
+.pass-main::before {
+  content: "В+";
+  position: absolute;
+  right: -5%;
+  bottom: -24%;
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 3.2vw, 2.65rem);
-  letter-spacing: -.035em;
+  font-size: clamp(130px, 17vw, 195px);
+  line-height: 1;
+  color: var(--ink);
+  opacity: .028;
+  transform: rotate(-8deg);
+  pointer-events: none;
 }
 
-.note-value small {
-  display: block;
-  margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: clamp(6px, .54vw, 7px);
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--note-ink-soft);
-}
-
-.note-mid {
+.pass-top {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex: 1;
-  align-items: center;
-  gap: clamp(10px, 1.8vw, 22px);
-  padding: clamp(4px, .7vw, 8px) 0;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-.note-medallion {
+.pass-monogram {
+  width: clamp(32px, 3vw, 40px);
+  height: clamp(32px, 3vw, 40px);
   flex: none;
-  width: clamp(58px, 8.6vw, 92px);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(23, 58, 46, .48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border: 1px solid rgba(20, 37, 29, .45);
   border-radius: 50%;
-  background:
-    repeating-radial-gradient(circle, transparent 0 5px, rgba(23, 58, 46, .16) 5px 6px),
-    var(--note-paper);
-  box-shadow:
-    inset 0 0 0 4px var(--note-paper),
-    inset 0 0 0 5px rgba(23, 58, 46, .32),
-    inset 0 0 0 10px var(--note-paper),
-    inset 0 0 0 11px rgba(23, 58, 46, .14);
   font-family: var(--font-display);
-  font-size: clamp(16px, 2.2vw, 25px);
+  font-size: clamp(16px, 1.6vw, 20px);
   line-height: 1;
 }
 
-.note-medallion i {
-  font-style: normal;
-  font-size: .7em;
+.pass-monogram span {
+  font-size: .72em;
   color: var(--seal);
 }
 
-.note-title-wrap {
+.pass-club {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: clamp(7px, .68vw, 8.5px);
+  line-height: 1.45;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.pass-club span {
+  color: var(--muted-dark);
+}
+
+.pass-number {
+  margin-left: auto;
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: clamp(7px, .64vw, 8px);
+  letter-spacing: .08em;
+  color: var(--muted-dark);
+  white-space: nowrap;
+}
+
+.pass-body {
+  position: relative;
+  z-index: 1;
   flex: 1;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(8px, 1.5vw, 16px) 0;
   text-align: center;
 }
 
-.note-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5.1vw, 4.15rem);
-  font-weight: 400;
-  line-height: .88;
-  letter-spacing: .035em;
-  text-indent: .035em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
-}
-
-.note-sub {
-  margin: clamp(7px, .9vw, 11px) 0 0;
+.pass-kicker {
+  margin: 0 0 clamp(7px, 1vw, 11px);
   font-family: var(--font-mono);
   font-size: clamp(6.5px, .6vw, 8px);
   line-height: 1.4;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+}
+
+.pass-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.2vw, 4.05rem);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: .04em;
+  text-indent: .04em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+.pass-sub {
+  margin: clamp(8px, 1.1vw, 12px) 0 0;
+  font-family: var(--font-mono);
+  font-size: clamp(7px, .7vw, 9px);
+  line-height: 1.4;
   letter-spacing: .13em;
   text-transform: uppercase;
-  color: var(--note-ink-soft);
+  color: var(--muted-dark);
 }
 
-
-
-
-
-
-
-.note-foot {
+.pass-foot {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-end;
-  gap: 14px;
+  gap: 12px;
+  padding-top: clamp(8px, 1vw, 12px);
+  border-top: 1px solid var(--line-paper);
 }
 
-.note-sign {
+.pass-sign {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  font-family: "Caveat", var(--font-display);
-  font-size: clamp(13px, 1.35vw, 17px);
-  line-height: 1;
-  color: var(--note-ink-soft);
-  transform: rotate(-2deg);
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: clamp(6px, .54vw, 7.2px);
+  line-height: 1.3;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
 }
 
-.note-sign svg {
-  width: clamp(44px, 4.8vw, 60px);
-  height: auto;
-  margin-bottom: 1px;
-  color: rgba(23, 58, 46, .55);
+.pass-sign::before {
+  content: "";
+  width: clamp(34px, 3.6vw, 44px);
+  height: 1px;
+  background: var(--line-paper);
 }
 
-.note-dates {
+.pass-dates {
   display: grid;
   grid-template-columns: auto auto;
   gap: 1px 7px;
   margin-left: auto;
   font-family: var(--font-mono);
-  font-size: clamp(5.5px, .5vw, 6.5px);
+  font-size: clamp(6px, .54vw, 7.4px);
   line-height: 1.45;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--note-ink-soft);
+  color: var(--muted-dark);
 }
 
-.note-dates strong {
+.pass-dates strong {
   font-weight: 500;
-  color: var(--note-ink);
+  color: var(--ink);
 }
 
-.note-serial {
-  margin-left: auto;
-  text-align: right;
-  white-space: nowrap;
+.pass-stub {
+  width: var(--stub);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(18px, 2vw, 24px) 8px clamp(14px, 1.6vw, 20px);
+  border-left: 1px dashed rgba(20, 37, 29, .35);
+  border-radius: 0 11px 11px 0;
+  background: linear-gradient(90deg, rgba(20, 37, 29, .02), rgba(20, 37, 29, .07));
 }
 
-.note-serial span {
-  display: block;
-  margin-bottom: 2px;
+.stub-days {
+  width: clamp(46px, 5vw, 60px);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(20, 37, 29, .5);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 4px var(--paper), inset 0 0 0 5px rgba(20, 37, 29, .18);
+  line-height: 1;
+}
+
+.stub-days strong {
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.45vw, 18px);
+  font-weight: 400;
+}
+
+.stub-days small {
+  margin-top: 2px;
   font-family: var(--font-mono);
-  font-size: clamp(5.5px, .52vw, 6.5px);
-  letter-spacing: .14em;
+  font-size: clamp(5.5px, .5vw, 6.5px);
+  letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--note-ink-soft);
+  color: var(--muted-dark);
 }
 
-.note-serial strong {
+.stub-code {
+  margin-top: auto;
+  text-align: center;
+}
+
+.stub-code span {
   display: block;
-  padding-bottom: 2px;
-  border-bottom: 1px solid rgba(23, 58, 46, .3);
+  margin-bottom: 3px;
   font-family: var(--font-mono);
-  font-size: clamp(12px, 1.75vw, 17px);
+  font-size: clamp(5.8px, .52vw, 7.2px);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+}
+
+.stub-code strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.5vw, 14px);
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: .1em;
-}
-
-.note-arrow {
-  position: absolute;
-  z-index: 4;
-  right: clamp(28px, 3.4vw, 42px);
-  bottom: clamp(54px, 7vw, 68px);
-  width: clamp(82px, 9.5vw, 118px);
-  height: auto;
-  color: var(--seal);
-  opacity: .86;
-  transform: rotate(-4deg);
-  pointer-events: none;
-}
-
-.note-annotation {
-  position: absolute;
-  z-index: 4;
-  right: clamp(18px, 2.4vw, 30px);
-  bottom: clamp(104px, 12.5vw, 122px);
-  font-family: "Caveat", var(--font-display);
-  font-size: clamp(15px, 1.6vw, 20px);
-  line-height: 1;
-  color: var(--seal);
-  transform: rotate(-7deg);
-  pointer-events: none;
-}
-
-.note-microtext {
-  position: absolute;
-  left: 50%;
-  z-index: 3;
-  width: max-content;
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: clamp(4.5px, .42vw, 5.5px);
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: rgba(23, 58, 46, .55);
-  pointer-events: none;
+  letter-spacing: .07em;
   white-space: nowrap;
 }
 
-.note-microtext-top {
-  top: 10px;
-}
-
-.note-microtext-bottom {
-  bottom: 10px;
+.pass-arrow {
+  position: absolute;
+  z-index: 4;
+  left: 58%;
+  bottom: clamp(48px, 6vw, 66px);
+  width: clamp(100px, 15vw, 150px);
+  height: auto;
+  color: var(--brass-deep);
+  opacity: .7;
+  pointer-events: none;
 }
 
 .pass-stamp {
   position: absolute;
   z-index: 6;
-  top: 47%;
-  left: 26%;
-  width: clamp(80px, 9vw, 116px);
+  top: 22%;
+  left: 86%;
+  width: clamp(82px, 8.8vw, 112px);
   padding: 6px 8px 7px;
   border: 2px solid var(--seal);
-  box-shadow: inset 0 0 0 2px var(--note-paper), inset 0 0 0 3px var(--seal);
+  box-shadow: inset 0 0 0 2px var(--paper), inset 0 0 0 3px var(--seal);
   color: var(--seal);
   text-align: center;
   font-family: var(--font-mono);
-  font-size: clamp(7.5px, .82vw, 10px);
+  font-size: clamp(7.5px, .8vw, 9.5px);
   line-height: 1.1;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1708,58 +1653,65 @@ html.js .reveal.is-visible {
   }
 
   .pass {
-    aspect-ratio: 1.92 / 1;
-    border-radius: 7px;
+    --stub: 31%;
+    aspect-ratio: 1.72 / 1;
+    border-radius: 8px;
   }
 
-  .note-inner {
+  .pass::before,
+  .pass::after {
+    right: calc(var(--stub) - 8px);
+    width: 16px;
+    height: 16px;
+  }
+
+  .pass::before {
+    top: -8px;
+  }
+
+  .pass::after {
+    bottom: -8px;
+  }
+
+  .pass-main {
     padding: 13px 14px;
   }
 
-  .note-head {
-    grid-template-columns: 1fr auto;
+  .pass-title {
+    font-size: clamp(2.2rem, 11vw, 3.1rem);
   }
 
-  .note-edition {
+  .pass-kicker,
+  .pass-dates,
+  .stub-days {
     display: none;
   }
 
-  .note-mid {
-    gap: 0;
+  .pass-foot {
+    padding-top: 6px;
+    border-top: 0;
   }
 
-  .note-medallion,
-  .note-sign,
-  .note-dates,
-  .note-watermark,
-  .note-microtext {
-    display: none;
+  .pass-sub {
+    font-size: 6.5px;
+    letter-spacing: .08em;
   }
 
-  .note-title {
-    font-size: clamp(2.2rem, 11.5vw, 3.1rem);
+  .stub-code strong {
+    font-size: clamp(9px, 2.8vw, 12px);
   }
 
-  .note-sub {
-    letter-spacing: .09em;
-  }
-
-  .note-arrow {
-    right: 16px;
-    bottom: 38px;
-    width: 62px;
-  }
-
-  .note-annotation {
-    right: 14px;
-    bottom: 66px;
-    font-size: 15px;
+  .pass-arrow {
+    left: auto;
+    right: 10px;
+    bottom: 34px;
+    width: 64px;
   }
 
   .pass-stamp {
-    top: 76%;
-    left: 24%;
-    width: 82px;
+    top: 38%;
+    left: 84%;
+    width: 80px;
   }
 
   .pass-caption {
@@ -1883,18 +1835,6 @@ html.js .reveal.is-visible {
   .club-footer p:last-child {
     order: 2;
     flex-basis: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .note-annotation {
-    display: none;
-  }
-
-  .note-arrow {
-    right: 14px;
-    bottom: 42px;
-    width: 54px;
   }
 }
 
